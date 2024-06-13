@@ -757,8 +757,27 @@ function StreamController() {
             if (isNaN(initialBufferLevel) || initialBufferLevel <= playbackController.getBufferLevel(excludedStreamProcessors) || (adapter.getIsDynamic() && initialBufferLevel > playbackController.getLiveDelay())) {
                 initialPlayback = false;
                 _createPlaylistMetrics(PlayList.INITIAL_PLAYOUT_START_REASON);
+                // console.log("haohao autoPlay自动播放 调用playbackController play()")
+                // var QoElog = log4javascript.getLogger();
+                // var QoEfile = new log4javascript.FileAppender("myLogFile.log");
+                // QoElog.addAppender(QoEfile);
+
+                var currentTime = new Date().getTime();
+                console.log('haohao 自动播放-开始加载 currentTime:', currentTime);
+                console.log("haohao 自动播放 调用 _onBufferLevelUpdated() 下的 playbackController.play()");
                 playbackController.play();
+                console.log("haohao 自动播放 playbackController.play() 调用完成");
+
             }
+            // console.log("haohao 自动 playbackController 调用完成");
+            // console.log("haohao 自动 playbackController 自动播放调用完成未播放，好像要等这个函数返回")
+            // // sleep 3s
+            // var start = new Date().getTime();
+            // while (true) {
+            //     if (new Date().getTime() - start > 3000) {
+            //         break;
+            //     }
+            // }
         }
 
         if (e && e.mediaType) {

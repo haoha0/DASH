@@ -243,7 +243,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
     var defaultExternalSettings = {
         mpd: encodeURIComponent('https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'),
         loop: true,
-        autoPlay: true,
+        autoPlay: false,
         autoLoad: false,
         muted: false,
         drmToday: false,
@@ -294,7 +294,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
     $scope.audioPlaybackRate = 1.00;
 
     // Starting Options
-    $scope.autoPlaySelected = true;
+    $scope.autoPlaySelected = false;
     $scope.autoLoadSelected = false;
     $scope.muted = false;
     $scope.cmcdEnabled = false;
@@ -2032,6 +2032,39 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
 
     function updateMetrics(type) {
         var dashMetrics = $scope.player.getDashMetrics();
+        // add
+        // TODO using how to use dashMetrics
+        // getCurrentRepresentationSwitch,
+        // getCurrentBufferState,
+        // getCurrentBufferLevel,
+        // getCurrentHttpRequest,
+        // getHttpRequests,
+        // getCurrentDroppedFrames,
+        // getCurrentSchedulingInfo,
+        // getCurrentDVRInfo,
+        // getCurrentManifestUpdate,
+        // getLatestFragmentRequestHeaderValueByID,
+        // getLatestMPDRequestHeaderValueByID,
+
+        // var representation = dashMetrics.getCurrentRepresentationSwitch("video")
+        // var buffer_state = dashMetrics.getCurrentBufferState("video")
+        // var buffer_level =dashMetrics.getCurrentBufferLevel("video")
+        // var http_request = dashMetrics.getCurrentHttpRequest("video")
+        // var http_requests = dashMetrics.getHttpRequests("video")
+        // var dropped_frames = dashMetrics.getCurrentDroppedFrames()
+        // var scheduling_info = dashMetrics.getCurrentSchedulingInfo()
+        // var dvr_info = dashMetrics.getCurrentDVRInfo()
+        // var manifest_update = dashMetrics.getCurrentManifestUpdate()
+        // console.log("representation: ", representation)
+        // console.log("buffer_state: ", buffer_state)
+        // console.log("buffer_level: ", buffer_level)
+        // console.log("http_request: ", http_request)
+        // console.log("http_requests: ", http_requests)
+        // console.log("dropped_frames: ", dropped_frames)
+        // console.log("scheduling_info: ", scheduling_info)
+        // console.log("dvr_info: ", dvr_info)
+        // console.log("manifest_update: ", manifest_update)
+
         var dashAdapter = $scope.player.getDashAdapter();
 
         if (dashMetrics && $scope.currentStreamInfo) {
@@ -2047,6 +2080,12 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
             }
 
             var bitrate = repSwitch ? Math.round(dashAdapter.getBandwidthForRepresentation(repSwitch.to, periodIdx) / 1000) : NaN;
+            // haohao
+            // 如果是视频类型
+            if (type === 'video') {
+                console.log('haohao video bitrate and current time: ', bitrate, $scope.player.time())
+            }
+            
             var droppedFramesMetrics = dashMetrics.getCurrentDroppedFrames();
             var droppedFPS = droppedFramesMetrics ? droppedFramesMetrics.droppedFrames : 0;
             var liveLatency = 0;

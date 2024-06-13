@@ -107,14 +107,16 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     };
 
     var addPlayerEventsListeners = function () {
-        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_STARTED, _onPlayStart, this);
-        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_PAUSED, _onPlaybackPaused, this);
-        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_TIME_UPDATED, _onPlayTimeUpdate, this);
-        self.player.on(dashjs.MediaPlayer.events.STREAM_ACTIVATED, _onStreamActivated, this);
-        self.player.on(dashjs.MediaPlayer.events.STREAM_DEACTIVATED, _onStreamDeactivated, this);
-        self.player.on(dashjs.MediaPlayer.events.STREAM_TEARDOWN_COMPLETE, _onStreamTeardownComplete, this);
-        self.player.on(dashjs.MediaPlayer.events.TEXT_TRACKS_ADDED, _onTracksAdded, this);
-        self.player.on(dashjs.MediaPlayer.events.BUFFER_LEVEL_UPDATED, _onBufferLevelUpdated, this);
+        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_STARTED, _onPlayStart, this); 
+        // 监听播放开始事件 在Playbackontroller.js的_onPlaybackStart函数中触发，
+        // 发送一个PLAYBACK_STARTED事件，这里监听这个事件，然后执行_onPlayStart函数
+        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_PAUSED, _onPlaybackPaused, this); // 监听播放暂停事件
+        self.player.on(dashjs.MediaPlayer.events.PLAYBACK_TIME_UPDATED, _onPlayTimeUpdate, this); // 监听播放时间更新事件
+        self.player.on(dashjs.MediaPlayer.events.STREAM_ACTIVATED, _onStreamActivated, this); // 监听流激活事件
+        self.player.on(dashjs.MediaPlayer.events.STREAM_DEACTIVATED, _onStreamDeactivated, this); // 监听流停用事件
+        self.player.on(dashjs.MediaPlayer.events.STREAM_TEARDOWN_COMPLETE, _onStreamTeardownComplete, this); // 监听流拆除完成事件
+        self.player.on(dashjs.MediaPlayer.events.TEXT_TRACKS_ADDED, _onTracksAdded, this); // 监听文本轨道添加事件
+        self.player.on(dashjs.MediaPlayer.events.BUFFER_LEVEL_UPDATED, _onBufferLevelUpdated, this); // 监听缓冲级别更新事件
     };
 
     var removePlayerEventsListeners = function () {
@@ -132,52 +134,61 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
         return id + (idSuffix ? idSuffix : '');
     };
 
-    var setPlayer = function (player) {
-        if (self.player) {
-            removePlayerEventsListeners();
+    var setPlayer = function (player) { // 设置播放器
+        if (self.player) { // 如果播放器存在
+            removePlayerEventsListeners(); // 移除播放器事件监听
         }
-        player = self.player = player;
-        addPlayerEventsListeners();
+        player = self.player = player; // 设置播放器
+        addPlayerEventsListeners(); // 添加播放器事件监听
     };
 
     //************************************************************************************
     // PLAYBACK
     //************************************************************************************
 
-    var togglePlayPauseBtnState = function () {
-        if (self.player.isPaused()) {
-            setPlayBtn();
+    var togglePlayPauseBtnState = function () { // 播放/暂停按钮状态切换
+        if (self.player.isPaused()) { // 如果播放器暂停
+            setPlayBtn(); // 设置播放按钮
         } else {
-            setPauseBtn();
+            setPauseBtn(); // 设置暂停按钮
         }
     };
 
-    var setPlayBtn = function () {
-        var span = document.getElementById(getControlId('iconPlayPause'));
+    // todo
+    var setPlayBtn = function () {  // 与setPauseBtn不同，该函数会被_onStreamTeardownComplete调用，初始加载的按钮是播放按钮
+        var span = document.getElementById(getControlId('iconPlayPause')); // 获取播放暂停按钮
         if (span !== null) {
             span.classList.remove('icon-pause');
-            span.classList.add('icon-play');
+            span.classList.add('icon-play');    // 设置一个播放按钮
         }
     };
 
     var setPauseBtn = function () {
-        var span = document.getElementById(getControlId('iconPlayPause'));
+        var span = document.getElementById(getControlId('iconPlayPause')); // 获取播放暂停按钮
         if (span !== null) {
             span.classList.remove('icon-play');
-            span.classList.add('icon-pause');
+            span.classList.add('icon-pause');  // 设置一个暂停按钮
         }
     };
 
-    var _onPlayPauseClick = function (/*e*/) {
+    var _onPlayPauseClick = function (/*e*/) {  // 播放按钮点击事件
+        // 这里是触发点击播放按钮事件，需要记录一次时间
+        var currentTime = new Date().getTime();
+        console.log('haohao 手动播放-开始加载 currentTime:', currentTime);
         togglePlayPauseBtnState.call(this);
-        self.player.isPaused() ? self.player.play() : self.player.pause();
+        self.player.isPaused() ? self.player.play() : self.player.pause(); // haohao 手动播放调用
     };
 
-    var _onPlaybackPaused = function (/*e*/) {
+    var _onPlaybackPaused = function (/*e*/) { 
         togglePlayPauseBtnState();
     };
 
-    var _onPlayStart = function (/*e*/) {
+    var _onPlayStart = function (/*e*/) { // 播放开始事件
+        // 当前时间
+        var currentTime = new Date().getTime();
+        console.log('haohao 正式播放开始 currentTime:', currentTime);
+        // console.log("手动播放时，正式播放是假滴，呜呜呜 playbackController 调用完成视频好像就开始播放了")
+        // 这里console完之后停了几秒才播放
         setTime(displayUTCTimeCodes ? self.player.timeAsUtc() : self.player.timeInDvrWindow());
         updateDuration();
         togglePlayPauseBtnState();
@@ -694,7 +705,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
         }
     };
 
-    var _onStreamTeardownComplete = function (/*e*/) {
+    var _onStreamTeardownComplete = function (/*e*/) {  // Triggered when the player has been reset.
         setPlayBtn();
         timeDisplay.textContent = '00:00';
     };
@@ -1052,7 +1063,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
                 trackSwitchBtn.classList.add('hide');
             }
             addPlayerEventsListeners();
-            playPauseBtn.addEventListener('click', _onPlayPauseClick);
+            playPauseBtn.addEventListener('click', _onPlayPauseClick);  // 按钮点击事件
             muteBtn.addEventListener('click', onMuteClick);
             fullscreenBtn.addEventListener('click', onFullscreenClick);
             seekbar.addEventListener('mousedown', onSeeking, true);

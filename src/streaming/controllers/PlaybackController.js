@@ -111,6 +111,7 @@ function PlaybackController() {
 
     /**
      * Initializes the PlaybackController. This function is called whenever the stream is switched.
+     * 这个函数在切换流时调用，用于初始化 PlaybackController。
      * @param {object} sInfo
      * @param {boolean} periodSwitch
      */
@@ -124,6 +125,7 @@ function PlaybackController() {
 
     /**
      * Initializes the PlaybackController when the first stream is to be played.
+     * 当要播放第一个流时，初始化 PlaybackController。
      * @private
      */
     function _initializeForFirstStream() {
@@ -144,7 +146,7 @@ function PlaybackController() {
 
         if (playOnceInitialized) {
             playOnceInitialized = false;
-            play();
+            play(); // 通过这里调用了 play 方法，触发了 play 事件。
         }
     }
 
@@ -178,7 +180,17 @@ function PlaybackController() {
     /**
      * Triggers play() on the video element
      */
+    // todo 有可能是play触发的地方
     function play(adjustLiveDelay = false) {
+        var currentTime = new Date().getTime();
+        console.log('haohao playbackController play() sleep 3s:', currentTime);
+        // sleep 3s
+        // var start = new Date().getTime();
+        // while (true) {
+        //     if (new Date().getTime() - start > 3000) {
+        //         break;
+        //     }
+        // }
         if (streamInfo && videoModel && videoModel.getElement()) {
             if (adjustLiveDelay && isDynamic) {
                 _adjustLiveDelayAfterUserInteraction(getTime());
@@ -580,8 +592,8 @@ function PlaybackController() {
         streamInfo = info;
     }
 
-    function _onCanPlay() {
-        eventBus.trigger(Events.CAN_PLAY);
+    function _onCanPlay() { // 当 _onCanPlay 函数被调用时，它会通过 eventBus 触发 CAN_PLAY 事件。
+        eventBus.trigger(Events.CAN_PLAY);  
     }
 
     function _onCanPlayThrough() {
@@ -601,11 +613,17 @@ function PlaybackController() {
         }
     }
 
+    // 当触发 play 事件时，_onPlaybackStart 函数会被调用。
     function _onPlaybackStart() {
-        logger.info('Native video element event: play');
-        updateCurrentTime();
-        startUpdatingWallclockTime();
-        eventBus.trigger(Events.PLAYBACK_STARTED, { startTime: getTime() });
+        logger.info('Native video element event: play'); // 日志，使用 logger 对象记录了一条信息，指示本地视频元素触发了 play 事件。
+        updateCurrentTime(); // 调用 updateCurrentTime 函数，更新当前时间。
+        startUpdatingWallclockTime(); // 启动时钟
+        // 这个函数在先，但是触发事件后，controlbar中的监听立刻执行了
+        // 这里既然传递了一个对象，那么应该就是开始播放的时间
+    
+        // 通过sleep判断，这个PLAYBACK_STARTED事件未发送之前，视频没有正式播放
+        eventBus.trigger(Events.PLAYBACK_STARTED, { startTime: getTime() }); // 触发 PLAYBACK_STARTED 事件，传递了一个对象，包含了开始时间。
+        // console.log('发送PLAYBACK_STARTED:', new Date().getTime());
     }
 
     function _onPlaybackWaiting() {
@@ -835,6 +853,8 @@ function PlaybackController() {
 
     function addAllListeners() {
         videoModel.addEventListener('canplay', _onCanPlay);
+        // 这行代码使用 addEventListener 方法将一个 canplay 事件监听器添加到 videoModel 对象上。当 videoModel 对象触发 canplay 事件时，将调用 _onCanPlay 函数。
+        // haohao: 这里可以调整播放时监听的事件
         videoModel.addEventListener('canplaythrough', _onCanPlayThrough);
         videoModel.addEventListener('play', _onPlaybackStart);
         videoModel.addEventListener('waiting', _onPlaybackWaiting);

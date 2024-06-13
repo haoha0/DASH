@@ -38,6 +38,9 @@
     <!-- Google Cast -->
     <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 
+    <!-- haohao 打印日志消息 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.15/log4javascript.js"></script>
+
 </head>
 <body ng-controller="DashController">
 
@@ -126,6 +129,7 @@
                 </button>
             </div>
             <input type="text" class="form-control" ng-model="selectedItem.url">
+            <!-- TODO -->
             <span class="input-group-btn">
                     <button class="btn btn-default" ng-click="toggleOptionsGutter(!optionsGutter)"
                             ng-cloak>{{getOptionsButtonLabel()}}</button>
@@ -151,6 +155,8 @@
                            ng-checked="autoLoadSelected">
                     Auto-Load
                 </label>
+                <!-- TODO -->
+                <!-- toggleAutoPlay()函数只是控制是否设置autoplay属性，只是设置参数，并不控制播放，应该找到播放的地方。 -->
                 <label class="topcoat-checkbox" data-toggle="tooltip" data-placement="right"
                        title="Enables automatic startup of the media once the media is loaded">
                     <input type="checkbox" ng-model="autoPlaySelected" ng-change="toggleAutoPlay()"
@@ -879,6 +885,7 @@
                     <div id="playPauseBtn" class="btn-play-pause" data-toggle="tooltip" data-placement="bottom"
                          title="Play/Pause">
                         <span id="iconPlayPause" class="icon-play"></span>
+                        <!-- todo 这里放的是播放/暂停按钮 -->
                     </div>
                     <span id="videoTime" class="time-display">00:00:00</span>
                     <div id="fullscreenBtn" class="btn-fullscreen control-icon-layout" data-toggle="tooltip"
