@@ -592,15 +592,14 @@ function MediaPlayer() {
      * @instance
      */
     function play() {
-        var currentTime = new Date().getTime();
-        console.log("haohao 手动播放 调用 MediaPlayer.play() 下的 playbackController.play()");
+        console.log('haohao 手动播放 调用 MediaPlayer.play() 下的 playbackController.play()');
         if (!playbackInitialized) {
             throw PLAYBACK_NOT_INITIALIZED_ERROR;
         }
         if (!autoPlay || (isPaused() && playbackInitialized)) {
             playbackController.play(true);
         }
-        console.log("haohao 手动播放 playbackController.play() 调用完成，视频开始播放");
+        console.log('haohao 手动播放 playbackController.play() 调用完成，视频开始播放');
         // console.log("haohao 手动 playbackController 调用完成视频好像就开始播放了")
         // 调用完成视频好像就开始播放了
         // sleep 3s
