@@ -392,6 +392,12 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
         }
     }, $scope);
 
+    // haohao: 监听BUFFER_EMPTY事件
+    $scope.player.on(dashjs.MediaPlayer.events.BUFFER_EMPTY, function (e) {
+        console.log('haohao Event received: ' + e.type);
+        console.log('haohao 触发重缓冲事件 buffer empty.');
+
+    }, $scope);
 
     $scope.player.initialize($scope.video, null, $scope.autoPlaySelected);
     $scope.player.attachTTMLRenderingDiv($('#video-caption')[0]);

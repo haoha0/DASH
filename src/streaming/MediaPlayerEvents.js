@@ -58,6 +58,7 @@ class MediaPlayerEvents extends EventsBase {
         /**
          * Triggered when the video element's buffer state changes to stalled.
          * Check mediaType in payload to determine type (Video, Audio, FragmentedText).
+         * haohao: 当视频元素的缓冲状态变为停滞状态时触发。检查有效载荷中的mediaType以确定类型(视频，音频，碎片文本)。
          * @event MediaPlayerEvents#BUFFER_EMPTY
          */
         this.BUFFER_EMPTY = 'bufferStalled';
@@ -65,18 +66,21 @@ class MediaPlayerEvents extends EventsBase {
         /**
          * Triggered when the video element's buffer state changes to loaded.
          * Check mediaType in payload to determine type (Video, Audio, FragmentedText).
+         * haohao: 当视频元素的缓冲状态变为loaded时触发。检查有效载荷中的mediaType以确定类型(视频，音频，碎片文本)。
          * @event MediaPlayerEvents#BUFFER_LOADED
          */
         this.BUFFER_LOADED = 'bufferLoaded';
 
         /**
          * Triggered when the video element's buffer state changes, either stalled or loaded. Check payload for state.
+         * haohao: 当视频元素的缓冲状态发生变化时触发。检查有效载荷状态。
          * @event MediaPlayerEvents#BUFFER_LEVEL_STATE_CHANGED
          */
         this.BUFFER_LEVEL_STATE_CHANGED = 'bufferStateChanged';
 
         /**
          * Triggered when the buffer level of a media type has been updated
+         * haohao: 当媒体类型的缓冲区级别被更新时触发。
          * @event MediaPlayerEvents#BUFFER_LEVEL_UPDATED
          */
         this.BUFFER_LEVEL_UPDATED = 'bufferLevelUpdated';
@@ -112,6 +116,7 @@ class MediaPlayerEvents extends EventsBase {
         this.ERROR = 'error';
         /**
          * Triggered when a fragment download has completed.
+         * haohao: 片段下载完成时触发。
          * @event MediaPlayerEvents#FRAGMENT_LOADING_COMPLETED
          */
         this.FRAGMENT_LOADING_COMPLETED = 'fragmentLoadingCompleted';
@@ -123,6 +128,7 @@ class MediaPlayerEvents extends EventsBase {
         this.FRAGMENT_LOADING_PROGRESS = 'fragmentLoadingProgress';
         /**
          * Triggered when a fragment download has started.
+         * haohao: 片段下载开始时触发。
          * @event MediaPlayerEvents#FRAGMENT_LOADING_STARTED
          */
         this.FRAGMENT_LOADING_STARTED = 'fragmentLoadingStarted';
@@ -159,6 +165,7 @@ class MediaPlayerEvents extends EventsBase {
 
         /**
          * Triggered anytime there is a change to the overall metrics.
+         * haohao: 在整体指标发生更改时触发。
          * @event MediaPlayerEvents#METRICS_CHANGED
          */
         this.METRICS_CHANGED = 'metricsChanged';
@@ -317,6 +324,7 @@ class MediaPlayerEvents extends EventsBase {
 
         /**
          * Sent when playback completes.
+         * haohao: 播放结束。
          * @event MediaPlayerEvents#PLAYBACK_ENDED
          */
         this.PLAYBACK_ENDED = 'playbackEnded';
@@ -331,6 +339,7 @@ class MediaPlayerEvents extends EventsBase {
         /**
          * This event is fired once the playback has been initialized by MediaPlayer.js.
          * After that event methods such as setTextTrack() can be used.
+         * haohao: 一旦播放被MediaPlayer.js初始化，他的事件就会被触发。在此事件之后，可以使用setTextTrack()等方法。
          * @event MediaPlayerEvents#PLAYBACK_INITIALIZED
          */
         this.PLAYBACK_INITIALIZED = 'playbackInitialized';
@@ -357,6 +366,7 @@ class MediaPlayerEvents extends EventsBase {
 
         /**
          * Sent when playback is paused.
+         * haohao: 播放暂停。
          * @event MediaPlayerEvents#PLAYBACK_PAUSED
          */
         this.PLAYBACK_PAUSED = 'playbackPaused';
@@ -364,6 +374,7 @@ class MediaPlayerEvents extends EventsBase {
         /**
          * Sent when the media begins to play (either for the first time, after having been paused,
          * or after ending and then restarting).
+         * haohao: 当媒体开始播放时(第一次播放，暂停后，或结束后重新开始)。
          *
          * @event MediaPlayerEvents#PLAYBACK_PLAYING
          */
@@ -373,18 +384,21 @@ class MediaPlayerEvents extends EventsBase {
          * Sent periodically to inform interested parties of progress downloading
          * the media. Information about the current amount of the media that has
          * been downloaded is available in the media element's buffered attribute.
+         * haohao: 定期发送，以通知感兴趣的各方下载媒体的进度。有关已下载媒体的当前量的信息
          * @event MediaPlayerEvents#PLAYBACK_PROGRESS
          */
         this.PLAYBACK_PROGRESS = 'playbackProgress';
 
         /**
          * Sent when the playback speed changes.
+         * haohao: 播放速度变化时发送。
          * @event MediaPlayerEvents#PLAYBACK_RATE_CHANGED
          */
         this.PLAYBACK_RATE_CHANGED = 'playbackRateChanged';
 
         /**
          * Sent when a seek operation completes.
+         * haohao: 当搜索操作完成时发送。
          * @event MediaPlayerEvents#PLAYBACK_SEEKED
          */
         this.PLAYBACK_SEEKED = 'playbackSeeked';
@@ -397,6 +411,7 @@ class MediaPlayerEvents extends EventsBase {
 
         /**
          * Sent when the video element reports stalled
+         * haohao: 当视频元素报告停滞时发送。
          * @event MediaPlayerEvents#PLAYBACK_STALLED
          */
         this.PLAYBACK_STALLED = 'playbackStalled';
@@ -404,26 +419,30 @@ class MediaPlayerEvents extends EventsBase {
         /**
          * Sent when playback of the media starts after having been paused;
          * that is, when playback is resumed after a prior pause event.
-         *
+         * 
+         * haohao: 在暂停后恢复播放时发送;也就是说，在先前暂停事件之后恢复播放。
          * @event MediaPlayerEvents#PLAYBACK_STARTED
          */
         this.PLAYBACK_STARTED = 'playbackStarted';
 
         /**
          * The time indicated by the element's currentTime attribute has changed.
+         * haohao: 元素的currentTime属性指示的时间已更改。
          * @event MediaPlayerEvents#PLAYBACK_TIME_UPDATED
          */
         this.PLAYBACK_TIME_UPDATED = 'playbackTimeUpdated';
 
         /**
          * Sent when the video element reports that the volume has changed
+         * haohao: 当视频元素报告音量已更改时发送。
          * @event MediaPlayerEvents#PLAYBACK_VOLUME_CHANGED
          */
         this.PLAYBACK_VOLUME_CHANGED = 'playbackVolumeChanged';
 
         /**
          * Sent when the media playback has stopped because of a temporary lack of data.
-         *
+         * 
+         * haohao: 由于临时缺乏数据，媒体播放已停止。
          * @event MediaPlayerEvents#PLAYBACK_WAITING
          */
         this.PLAYBACK_WAITING = 'playbackWaiting';
