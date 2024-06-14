@@ -174,9 +174,9 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     var _onPlayPauseClick = function (/*e*/) {  // 播放按钮点击事件
         // 这里是触发点击播放按钮事件，需要记录一次时间
         var currentTime = new Date().getTime();
-        console.log('haohao 手动播放-开始加载 currentTime:', currentTime);
+        console.log('[haohao] Manual playback start/pause: ' + currentTime);
         togglePlayPauseBtnState.call(this);
-        self.player.isPaused() ? self.player.play() : self.player.pause(); // haohao 手动播放调用
+        self.player.isPaused() ? self.player.play() : self.player.pause(); // 手动播放调用
     };
 
     var _onPlaybackPaused = function (/*e*/) { 
@@ -186,7 +186,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     var _onPlayStart = function (/*e*/) { // 播放开始事件
         // 当前时间
         var currentTime = new Date().getTime();
-        console.log('haohao 正式播放开始 currentTime:', currentTime);
+        console.log('[haohao] Playback started: ' + currentTime);
         // console.log("手动播放时，正式播放是假滴，呜呜呜 playbackController 调用完成视频好像就开始播放了")
         // 这里console完之后停了几秒才播放
         setTime(displayUTCTimeCodes ? self.player.timeAsUtc() : self.player.timeInDvrWindow());

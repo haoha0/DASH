@@ -183,7 +183,7 @@ function PlaybackController() {
     // todo 有可能是play触发的地方
     function play(adjustLiveDelay = false) {
         var currentTime = new Date().getTime();
-        console.log('haohao playbackController play() sleep 3s:', currentTime);
+        // console.log('haohao playbackController play() sleep 3s:', currentTime);
         // sleep 3s
         // var start = new Date().getTime();
         // while (true) {

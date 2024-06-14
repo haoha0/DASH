@@ -763,10 +763,10 @@ function StreamController() {
                 // QoElog.addAppender(QoEfile);
 
                 var currentTime = new Date().getTime();
-                console.log('haohao 自动播放-开始加载 currentTime:', currentTime);
-                console.log("haohao 自动播放 调用 _onBufferLevelUpdated() 下的 playbackController.play()");
+                console.log('[haohao] Auto playback start: ' + currentTime);
+                // console.log("haohao 自动播放 调用 _onBufferLevelUpdated() 下的 playbackController.play()");
                 playbackController.play();
-                console.log("haohao 自动播放 playbackController.play() 调用完成");
+                // console.log("haohao 自动播放 playbackController.play() 调用完成");
 
             }
             // console.log("haohao 自动 playbackController 调用完成");

@@ -394,8 +394,8 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
 
     // haohao: 监听BUFFER_EMPTY事件
     $scope.player.on(dashjs.MediaPlayer.events.BUFFER_EMPTY, function (e) {
-        console.log('haohao Event received: ' + e.type);
-        console.log('haohao 触发重缓冲事件 buffer empty.');
+        console.log('[haohao] Event received: ' + e.type);
+        console.log('[haohao] Triggers a rebuffering event: buffer empty ');
 
     }, $scope);
 
@@ -2089,7 +2089,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
             // haohao
             // 如果是视频类型
             if (type === 'video') {
-                console.log('haohao video bitrate and current time: ', bitrate, $scope.player.time())
+                console.log('[haohao] video bitrate: ' + bitrate + ', current time: ' + $scope.player.time())
             }
             
             var droppedFramesMetrics = dashMetrics.getCurrentDroppedFrames();
