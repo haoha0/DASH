@@ -242,7 +242,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
 
     var defaultExternalSettings = {
         mpd: encodeURIComponent('https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'),
-        loop: true,
+        loop: false, // haohao
         autoPlay: false,
         autoLoad: false,
         muted: false,
@@ -294,7 +294,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
     $scope.audioPlaybackRate = 1.00;
 
     // Starting Options
-    $scope.autoPlaySelected = false;
+    $scope.autoPlaySelected = false;     // haohao
     $scope.autoLoadSelected = false;
     $scope.muted = false;
     $scope.cmcdEnabled = false;
@@ -392,11 +392,18 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
         }
     }, $scope);
 
+    // haohao: 监听PLAYBACK_PLAYING事件
+    $scope.player.on(dashjs.MediaPlayer.events.PLAYBACK_PLAYING, function (e) {
+        var currentTime = new Date().getTime();
+        console.log('[haohao] Event received: ' + e.type);
+        console.log('[haohao] Playback is playing. ' + currentTime);
+    }, $scope);
+
     // haohao: 监听BUFFER_EMPTY事件
     $scope.player.on(dashjs.MediaPlayer.events.BUFFER_EMPTY, function (e) {
+        var currentTime = new Date().getTime();
         console.log('[haohao] Event received: ' + e.type);
-        console.log('[haohao] Triggers a rebuffering event: buffer empty ');
-
+        console.log('[haohao] Triggers a rebuffering event: buffer empty. ' + currentTime);
     }, $scope);
 
     $scope.player.initialize($scope.video, null, $scope.autoPlaySelected);
