@@ -177,6 +177,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     var _onLoadVideoClick = function (/*e*/) {
         var currentTime = new Date().getTime();
         console.log('[haohao] Load video: ' + currentTime);
+        console.log('[haohao] Auto playback start: ' + currentTime);
         // haohao: 记录load的时间作为playback启动， 与playing的时间差为启动延迟
     };
 

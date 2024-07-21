@@ -762,8 +762,8 @@ function StreamController() {
                 // var QoEfile = new log4javascript.FileAppender("myLogFile.log");
                 // QoElog.addAppender(QoEfile);
 
-                var currentTime = new Date().getTime();
-                console.log('[haohao] Auto playback start: ' + currentTime);
+                // var currentTime = new Date().getTime();
+                // console.log('[haohao] Auto playback start: ' + currentTime);
                 // console.log("haohao 自动播放 调用 _onBufferLevelUpdated() 下的 playbackController.play()");
                 playbackController.play();
                 // console.log("haohao 自动播放 playbackController.play() 调用完成");
