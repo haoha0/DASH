@@ -57,6 +57,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     var video,
         videoContainer,
         videoController,
+        loadVideoBtn, // haohao: 加载视频按钮
         playPauseBtn,
         bitrateListBtn,
         captionBtn,
@@ -89,6 +90,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
     var initControls = function (suffix) {
         idSuffix = suffix;
         videoController = document.getElementById(getControlId('videoController'));
+        loadVideoBtn = document.getElementById(getControlId('loadVideoBtn'));   // haohao: 加载视频按钮
         playPauseBtn = document.getElementById(getControlId('playPauseBtn'));
         bitrateListBtn = document.getElementById(getControlId('bitrateListBtn'));
         captionBtn = document.getElementById(getControlId('captionBtn'));
@@ -169,6 +171,13 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
             span.classList.remove('icon-play');
             span.classList.add('icon-pause');  // 设置一个暂停按钮
         }
+    };
+
+    // haohao: 加载视频按钮点击事件
+    var _onLoadVideoClick = function (/*e*/) {
+        var currentTime = new Date().getTime();
+        console.log('[haohao] Load video: ' + currentTime);
+        // haohao: 记录load的时间作为playback启动， 与playing的时间差为启动延迟
     };
 
     var _onPlayPauseClick = function (/*e*/) {  // 播放按钮点击事件
@@ -1063,6 +1072,7 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
                 trackSwitchBtn.classList.add('hide');
             }
             addPlayerEventsListeners();
+            loadVideoBtn.addEventListener('click', _onLoadVideoClick);  // haohao: 加载视频按钮点击事件
             playPauseBtn.addEventListener('click', _onPlayPauseClick);  // 按钮点击事件
             muteBtn.addEventListener('click', onMuteClick);
             fullscreenBtn.addEventListener('click', onFullscreenClick);
@@ -1147,7 +1157,8 @@ var ControlBar = function (dashjsMediaPlayer, displayUTCTimeCodes) {
 
         destroy: function () {
             this.reset();
-
+            
+            loadVideoBtn.removeEventListener('click', _onLoadVideoClick);   // haohao: 加载视频按钮点击事件
             playPauseBtn.removeEventListener('click', _onPlayPauseClick);
             muteBtn.removeEventListener('click', onMuteClick);
             fullscreenBtn.removeEventListener('click', onFullscreenClick);

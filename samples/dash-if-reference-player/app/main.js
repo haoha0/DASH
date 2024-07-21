@@ -242,7 +242,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
 
     var defaultExternalSettings = {
         mpd: encodeURIComponent('https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd'),
-        loop: false, // haohao
+        loop: true, // haohao
         autoPlay: false,
         autoLoad: false,
         muted: false,
@@ -294,7 +294,7 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
     $scope.audioPlaybackRate = 1.00;
 
     // Starting Options
-    $scope.autoPlaySelected = false;     // haohao
+    $scope.autoPlaySelected = true;     // haohao
     $scope.autoLoadSelected = false;
     $scope.muted = false;
     $scope.cmcdEnabled = false;

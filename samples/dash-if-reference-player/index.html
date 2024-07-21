@@ -134,7 +134,9 @@
                     <button class="btn btn-default" ng-click="toggleOptionsGutter(!optionsGutter)"
                             ng-cloak>{{getOptionsButtonLabel()}}</button>
                     <button class="btn btn-default" type="button" ng-click="doStop()">Stop</button>
-                    <button class="btn btn-primary" type="button" ng-click="doLoad()">Load</button>
+                    <button id="loadVideoBtn" class="btn btn-primary" type="button" ng-click="doLoad()">Load</button>
+                    <!-- haohao: load button position -->
+                    <!-- 直接在这里添加id不知道为什么可以跑，反正就是跑通了 -->
                 <!-- Testbutton -->
                     <button class="btn btn-default" type="button" ng-click="copyQueryUrl(); copyNotificationShow()">Copy Settings URL</button>
                 </span>
