@@ -2096,7 +2096,9 @@ app.controller('DashController', ['$scope', '$window', 'sources', 'contributors'
             // haohao
             // 如果是视频类型
             if (type === 'video') {
+                // bitrate and video quality index
                 console.log('[haohao] video bitrate: ' + bitrate + ', current time: ' + $scope.player.time())
+                console.log('[haohao] video quality index: ' + index)
             }
             
             var droppedFramesMetrics = dashMetrics.getCurrentDroppedFrames();
